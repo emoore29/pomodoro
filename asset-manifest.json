@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/AthenasCode/Pomodoro/static/css/main.a28866e6.css",
-    "main.js": "/AthenasCode/Pomodoro/static/js/main.466096fd.js",
-    "static/js/787.28cb0dcd.chunk.js": "/AthenasCode/Pomodoro/static/js/787.28cb0dcd.chunk.js",
-    "index.html": "/AthenasCode/Pomodoro/index.html",
-    "main.a28866e6.css.map": "/AthenasCode/Pomodoro/static/css/main.a28866e6.css.map",
-    "main.466096fd.js.map": "/AthenasCode/Pomodoro/static/js/main.466096fd.js.map",
-    "787.28cb0dcd.chunk.js.map": "/AthenasCode/Pomodoro/static/js/787.28cb0dcd.chunk.js.map"
+    "main.css": "/Pomodoro/static/css/main.a28866e6.css",
+    "main.js": "/Pomodoro/static/js/main.099c9720.js",
+    "static/js/787.28cb0dcd.chunk.js": "/Pomodoro/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/Pomodoro/index.html",
+    "main.a28866e6.css.map": "/Pomodoro/static/css/main.a28866e6.css.map",
+    "main.099c9720.js.map": "/Pomodoro/static/js/main.099c9720.js.map",
+    "787.28cb0dcd.chunk.js.map": "/Pomodoro/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a28866e6.css",
-    "static/js/main.466096fd.js"
+    "static/js/main.099c9720.js"
   ]
 }
