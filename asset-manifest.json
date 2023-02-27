@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/AthenasCode/Pomodoro/static/css/main.a28866e6.css",
+    "main.js": "/AthenasCode/Pomodoro/static/js/main.466096fd.js",
+    "static/js/787.28cb0dcd.chunk.js": "/AthenasCode/Pomodoro/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/AthenasCode/Pomodoro/index.html",
+    "main.a28866e6.css.map": "/AthenasCode/Pomodoro/static/css/main.a28866e6.css.map",
+    "main.466096fd.js.map": "/AthenasCode/Pomodoro/static/js/main.466096fd.js.map",
+    "787.28cb0dcd.chunk.js.map": "/AthenasCode/Pomodoro/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a28866e6.css",
+    "static/js/main.466096fd.js"
+  ]
+}
