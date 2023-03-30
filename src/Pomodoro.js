@@ -96,6 +96,7 @@ function Pomodoro() {
           setPlay={setPlay}
           resetTimer={resetTimer}
           setSessionMinutes={setSessionMinutes}
+          setSeconds={setSeconds}
         />
         <Timer
           typeOfSession={typeOfSession}

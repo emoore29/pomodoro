@@ -6,10 +6,12 @@ export default function TimeControls({
   setRest,
   rest,
   parentId,
+  setSeconds,
 }) {
   const [sessionEdit, setSessionEdit] = useState(false);
 
   function handleChange(e) {
+    setSeconds(0);
     parentId === "control-session"
       ? setSessionMinutes(e.target.value)
       : setRest(e.target.value);

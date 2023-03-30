@@ -1,13 +1,14 @@
 <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="2 1 20 20"
+              fill="white"
+              viewBox="2 1 2rem 2rem"
               strokeWidth="1.5"
-              stroke="currentColor"
+              stroke="white"
               className="w-6 h-6"
               display="block"
-              height="2rem"
-              width="2rem"
+              height="100%"
+              width="auto"
+              maxWidth="100%"
               margin="0"
             >
               <path

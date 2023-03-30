@@ -1,4 +1,7 @@
 import TimeControls from "./TimeControls";
+import playSvg from "../assets/playSvg.svg";
+import pauseSvg from "../assets/pauseSvg.svg";
+import resetSvg from "../assets/resetSvg.svg";
 
 export default function ActiveSessionInfo({
   play,
@@ -8,6 +11,7 @@ export default function ActiveSessionInfo({
   resetTimer,
   setSessionMinutes,
   setRest,
+  setSeconds,
 }) {
   return (
     <div id="activeSessionDisplay">
@@ -15,13 +19,19 @@ export default function ActiveSessionInfo({
         Session Length:{" "}
         <TimeControls
           parentId="control-session"
+          setSeconds={setSeconds}
           setSessionMinutes={setSessionMinutes}
           sessionMinutes={sessionMinutes}
         />
       </h2>
       <h2 id="control-break">
         Break Length:{" "}
-        <TimeControls parentId="control-break" rest={rest} setRest={setRest} />
+        <TimeControls
+          parentId="control-break"
+          setSeconds={setSeconds}
+          rest={rest}
+          setRest={setRest}
+        />
       </h2>
       <p>(Pause or reset to edit times)</p>
       <div id="playActive">
@@ -30,10 +40,14 @@ export default function ActiveSessionInfo({
           id="start_stop"
           onClick={() => setPlay((prev) => !prev)}
         >
-          {!play ? "play" : "pause"}
+          {!play ? (
+            <img id="playSvg" src={playSvg} alt="play" />
+          ) : (
+            <img id="pauseSvg" src={pauseSvg} alt="pause" />
+          )}
         </button>
         <button className="icon" id="reset" onClick={resetTimer}>
-          "reset"
+          <img id="resetSvg" src={resetSvg} alt="reset" />
         </button>
       </div>
     </div>

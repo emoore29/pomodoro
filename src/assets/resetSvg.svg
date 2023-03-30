@@ -1,11 +1,11 @@
 <svg
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
+            viewBox="2 1 2rem 2rem"
             fill="currentColor"
             className="w-5 h-5"
             display="block"
-            height="2rem"
-            width="2rem"
+            height="100%"
+            width="auto"
             margin="0"
           >
             <path

@@ -66,6 +66,21 @@ code {
   width: 100%;
 }
 
+#playSvg {
+  width: 2rem;
+  height: 2rem;
+}
+
+#pauseSvg {
+  width: 2rem;
+  height: 2rem;
+}
+
+#resetSvg {
+  width: 2rem;
+  height: 2rem;
+}
+
 #playActive {
   display: flex;
   justify-content: left;
