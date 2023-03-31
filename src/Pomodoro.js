@@ -1,5 +1,5 @@
 import "./Pomodoro.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Timer from "./Components/Timer";
 import ActiveSessionInfo from "./Components/ActiveSessionInfo";
 
@@ -10,12 +10,18 @@ function Pomodoro() {
   const [rest, setRest] = useState(5);
   const [minutes, setMinutes] = useState(sessionMinutes); // starts with a session, not a rest
   const [seconds, setSeconds] = useState(0);
+  const audioRef = useRef(null);
 
-  const beep = new Audio(
-    "https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg#t=33,38"
-  );
+  // const beep = new Audio(
+  //   "https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg#t=33,38"
+  // );
+
+  if (minutes === 0 && seconds === 1) {
+    audioRef.current.play();
+  }
 
   function toggleSessionType() {
+    setSeconds(0);
     if (typeOfSession === "session") {
       setTypeOfSession("rest");
     } else {
@@ -56,7 +62,7 @@ function Pomodoro() {
             setMinutes((prev) => prev - 1);
           } else {
             //minutes && seconds === 0
-            beep.play();
+
             toggleSessionType();
             if (typeOfSession === "session") {
               setMinutes(rest - 1);
@@ -78,18 +84,24 @@ function Pomodoro() {
 
   useEffect(() => {
     updateDisplayOfMinutes();
-  }, [sessionMinutes, rest]);
+  }, [sessionMinutes, rest, typeOfSession]);
 
   return (
     <>
+      <audio
+        ref={audioRef}
+        src="https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg#t=33,38"
+      ></audio>
       <div
         className="container"
         style={{
           backgroundColor: typeOfSession === "session" ? "#58427c" : "#a7bd83",
+          color: typeOfSession === "session" ? "#e6e0ef" : "#fafcf8",
         }}
       >
         <ActiveSessionInfo
           play={play}
+          toggleSessionType={toggleSessionType}
           sessionMinutes={sessionMinutes}
           rest={rest}
           setRest={setRest}
@@ -97,6 +109,7 @@ function Pomodoro() {
           resetTimer={resetTimer}
           setSessionMinutes={setSessionMinutes}
           setSeconds={setSeconds}
+          typeOfSession={typeOfSession}
         />
         <Timer
           typeOfSession={typeOfSession}
