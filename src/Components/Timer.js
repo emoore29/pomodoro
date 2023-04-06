@@ -7,7 +7,7 @@ export default function Timer({
   resetTimer,
 }) {
   return (
-    <div className="Pomodoro">
+    <div className="Timer">
       <h1 id="time-left">
         {minutes < 10 ? "0" + minutes : minutes}:
         {seconds < 10 ? "0" + seconds : seconds}

@@ -37,7 +37,12 @@ code {
 }
 
 .container {
-  color: white;
+  display: flex;
+  width: 100vw;
+}
+
+.pomodoro-container {
+  /* color: white; */
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -45,8 +50,8 @@ code {
   align-items: center;
 }
 
-.Pomodoro {
-  border: 3px solid white;
+.Timer {
+  border: 3px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   width: 15vw;
   min-width: 200px;
@@ -56,49 +61,32 @@ code {
   justify-content: space-evenly;
   align-items: center;
   margin: 0 5rem 0 5rem;
-  animation: fadeIn 2s;
 }
 
-#play-pause-reset {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 2s;
-  width: 100%;
-}
-
-#playSvg {
-  width: 2rem;
-  height: 2rem;
-}
-
-#pauseSvg {
-  width: 2rem;
-  height: 2rem;
-}
-
-#resetSvg {
-  width: 2rem;
-  height: 2rem;
-}
-
-#playActive {
+#controls {
   display: flex;
   justify-content: left;
   align-items: center;
-  /* animation: fadeIn 2s; */
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.svg {
+  width: 100%;
+  height: 100%;
 }
 
 .icon {
+  color: rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0);
-  color: white;
   cursor: pointer;
-  padding: 0;
+  padding: 0.5rem;
   margin: 0;
   border: none;
+  width: 40px;
+  height: 40px;
 }
 
 .time-controls {
@@ -108,7 +96,6 @@ code {
   justify-content: center;
   text-align: center;
   padding: 0.3rem;
-  animation: fadeIn 2s;
 }
 
 .time-label {
@@ -133,21 +120,56 @@ code {
 
 button[disabled] {
   cursor: not-allowed !important;
-  opacity: 0.6;
+  opacity: 1;
 }
 
-/* Remove default button styling */
+/* Update default button styling */
 button {
+  text-align: left;
   border: none;
+  border-radius: 0.5rem;
   outline: none;
   background: none;
-  padding: 0;
+  color: inherit;
+  padding: 0.5rem;
   margin: 0;
   cursor: pointer;
 }
 
-button[hover] {
-  opacity: 0.5;
+button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.edit-button:hover {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+}
+
+.edit-button button,
+.edit-button p {
+  font-size: 16px; /* or any other font size value you want */
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-container input {
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.input-container button {
+  flex: 0;
 }
 
 #open-menu {
@@ -155,24 +177,27 @@ button[hover] {
   top: 0;
   left: 0;
   padding: 0.5rem;
-  width: 35px;
+  margin: 0.5rem;
+  width: 50px;
 }
 
 #close-menu {
-  position: relative;
+  position: absolute;
+  top: 5px;
+  right: -40px;
   width: 35px;
 }
 
-#activeSessionDisplay {
-  position: absolute;
-  top: 0;
-  left: 0rem;
+#menu {
+  position: relative;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.7rem;
-  /* animation: fadeIn 2s; */
   background-color: #202123;
   opacity: 0.9;
   height: 100%;
-  padding: 0 0.5rem 0 0.5rem;
+  padding: 1rem;
+  min-width: 200px;
 }
 
 .session-controls {
@@ -180,11 +205,7 @@ button[hover] {
   align-items: center;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+#buttons-for-editing {
+  display: flex;
+  flex-direction: column;
 }
