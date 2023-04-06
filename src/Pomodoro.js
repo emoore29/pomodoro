@@ -12,12 +12,12 @@ function Pomodoro() {
   const [seconds, setSeconds] = useState(0);
   const audioRef = useRef(null);
 
-  // const beep = new Audio(
-  //   "https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg#t=33,38"
-  // );
+  const beep = new Audio(
+    "https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg#t=33,38"
+  );
 
   if (minutes === 0 && seconds === 1) {
-    audioRef.current.play();
+    beep.play();
   }
 
   function toggleSessionType() {
@@ -95,7 +95,7 @@ function Pomodoro() {
       <div
         className="container"
         style={{
-          backgroundColor: typeOfSession === "session" ? "#58427c" : "#a7bd83",
+          backgroundColor: typeOfSession === "session" ? "#58427c" : "#405E40",
           color: typeOfSession === "session" ? "#e6e0ef" : "#fafcf8",
         }}
       >
