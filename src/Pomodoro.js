@@ -11,11 +11,24 @@ function Pomodoro() {
   const [minutes, setMinutes] = useState(sessionMinutes); // starts with a session, not a rest
   const [seconds, setSeconds] = useState(0);
 
+  const circleRadius = 100;
+  const viewBoxSizing = circleRadius * 2 + 10; //"-5 0 150 150"
+  const viewBox =
+    "-5 5 " + viewBoxSizing.toString() + " " + viewBoxSizing.toString();
+  const circleCircumference = 2 * Math.PI * circleRadius;
+  const timeLeft = minutes * 60 + seconds;
+  let totalTime;
+  typeOfSession === "session"
+    ? (totalTime = sessionMinutes * 60)
+    : (totalTime = rest * 60);
+
+  const strokeDashoffset = (1 - timeLeft / totalTime) * circleCircumference; // calculates percentage of time left, offsets dasharray by that amount.
+
   const beep = new Audio(
     "https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg#t=33,38"
   );
 
-  if (minutes === 0 && seconds === 1) {
+  if (minutes === 0 && seconds === 0) {
     beep.play();
   }
 
@@ -37,15 +50,6 @@ function Pomodoro() {
         setMinutes(rest);
       }
     }
-  }
-
-  function resetTimer() {
-    setTypeOfSession("session");
-    setPlay(false);
-    setMinutes(25);
-    setSeconds(0);
-    setSessionMinutes(25);
-    setRest(5);
   }
 
   // this will run after every render.
@@ -94,10 +98,11 @@ function Pomodoro() {
         rest={rest}
         setRest={setRest}
         setPlay={setPlay}
-        resetTimer={resetTimer}
         setSessionMinutes={setSessionMinutes}
         setSeconds={setSeconds}
         typeOfSession={typeOfSession}
+        setTypeOfSession={setTypeOfSession}
+        setMinutes={setMinutes}
       />
       <div
         className="pomodoro-container"
@@ -106,13 +111,35 @@ function Pomodoro() {
           color: "rgba(255, 255, 255, 0.5)",
         }}
       >
+        <div className="clock-container">
+          <svg
+            id="circle-svg"
+            viewBox={viewBox}
+            width={2 * circleRadius}
+            height={2 * circleRadius}
+          >
+            <circle
+              className="timer-background"
+              cx={circleRadius}
+              cy={circleRadius}
+              r={circleRadius}
+              stroke={typeOfSession === "session" ? "#58427c" : "#405E40"}
+            />
+            <circle
+              className="timer-progress"
+              cx={circleRadius}
+              cy={circleRadius}
+              r={circleRadius}
+              strokeDasharray={circleCircumference}
+              strokeDashoffset={strokeDashoffset}
+            />
+          </svg>
+        </div>
         <Timer
           typeOfSession={typeOfSession}
           minutes={minutes}
           seconds={seconds}
           play={play}
-          setPlay={setPlay}
-          resetTimer={resetTimer}
         />
       </div>
     </div>

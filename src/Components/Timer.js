@@ -1,11 +1,4 @@
-export default function Timer({
-  typeOfSession,
-  minutes,
-  seconds,
-  play,
-  setPlay,
-  resetTimer,
-}) {
+export default function Timer({ minutes, seconds }) {
   return (
     <div className="Timer">
       <h1 id="time-left">

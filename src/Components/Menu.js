@@ -12,18 +12,36 @@ export default function Menu({
   sessionMinutes,
   rest,
   setPlay,
-  resetTimer,
   setSessionMinutes,
   setRest,
   setSeconds,
   toggleSessionType,
-  typeOfSession,
+  setTypeOfSession,
+  setMinutes,
 }) {
   const [activeMenu, setActiveMenu] = useState(false);
   const [editingFocus, setEditingFocus] = useState(false);
   const [newSessionMinutes, setNewSessionMinutes] = useState(25);
   const [newRestMinutes, setNewRestMinutes] = useState(5);
   const [editingRest, setEditingRest] = useState(false);
+
+  function restoreDefault() {
+    setTypeOfSession("session");
+    setPlay(false);
+    setMinutes(25);
+    setSeconds(0);
+    setSessionMinutes(25);
+    setRest(5);
+    setNewRestMinutes(5);
+    setNewSessionMinutes(25);
+  }
+
+  function restartTimer() {
+    setTypeOfSession("session");
+    setMinutes(newSessionMinutes);
+    setSeconds(0);
+    play && setPlay(false);
+  }
 
   const handleButtonClick = (btnId) => {
     btnId === "edit-focus" && setEditingFocus(true);
@@ -91,7 +109,10 @@ export default function Menu({
                   autoFocus
                   min="1"
                 />
-                <button onClick={() => handleTickClick("update-focus")}>
+                <button
+                  className="tick-btn"
+                  onClick={() => handleTickClick("update-focus")}
+                >
                   ✔
                 </button>
                 <button onClick={() => handleCancelClick("cancel-focus")}>
@@ -116,7 +137,10 @@ export default function Menu({
                   autoFocus
                   min="1"
                 />
-                <button onClick={() => handleTickClick("update-rest")}>
+                <button
+                  className="tick-btn"
+                  onClick={() => handleTickClick("update-rest")}
+                >
                   ✔
                 </button>
                 <button onClick={() => handleCancelClick("cancel-rest")}>
@@ -134,8 +158,12 @@ export default function Menu({
             <button disabled={play} onClick={toggleSessionType}>
               Toggle session type
             </button>
-            <button id="reset" onClick={resetTimer}>
-              Reset to default
+
+            <button id="reset" onClick={restartTimer}>
+              Reset timer
+            </button>
+            <button id="reset" onClick={restoreDefault}>
+              Restore default settings
             </button>
           </section>
 
