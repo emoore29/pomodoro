@@ -3,9 +3,10 @@ import { useState } from "react";
 // SVGs
 import { ReactComponent as PlaySvg } from "../assets/playSvg.svg";
 import { ReactComponent as PauseSvg } from "../assets/pauseSvg.svg";
-import { ReactComponent as ResetSvg } from "../assets/resetSvg.svg";
 import { ReactComponent as MenuSvg } from "../assets/menuSvg.svg";
 import { ReactComponent as CloseMenuSvg } from "../assets/closeMenuSvg.svg";
+import { ReactComponent as AudioOn } from "../assets/audioOn.svg";
+import { ReactComponent as AudioOff } from "../assets/audioOff.svg";
 
 export default function Menu({
   play,
@@ -18,6 +19,14 @@ export default function Menu({
   toggleSessionType,
   setTypeOfSession,
   setMinutes,
+  mute,
+  setMute,
+  focusColor,
+  setFocusColor,
+  restColor,
+  setRestColor,
+  handleRestColorChange,
+  handleFocusColorChange,
 }) {
   const [activeMenu, setActiveMenu] = useState(false);
   const [editingFocus, setEditingFocus] = useState(false);
@@ -34,6 +43,8 @@ export default function Menu({
     setRest(5);
     setNewRestMinutes(5);
     setNewSessionMinutes(25);
+    setFocusColor("#58427c");
+    setRestColor("#405E40");
   }
 
   function restartTimer() {
@@ -86,7 +97,7 @@ export default function Menu({
   };
 
   return (
-    <div>
+    <>
       {!activeMenu ? (
         <button
           onClick={() => {
@@ -166,13 +177,43 @@ export default function Menu({
               Restore default settings
             </button>
           </section>
-
+          <section id="colorSelectors">
+            <div className="colorSelector">
+              <label htmlFor="focusColorPicker">
+                Select Focus Color:{" "}
+                <input
+                  id="focusColorPicker"
+                  type="color"
+                  value={focusColor}
+                  onChange={handleFocusColorChange}
+                />
+              </label>
+            </div>
+            <div className="colorSelector">
+              <label htmlFor="breakColorPicker">
+                Select Break Color:{" "}
+                <input
+                  id="breakColorPicker"
+                  type="color"
+                  value={restColor}
+                  onChange={handleRestColorChange}
+                />
+              </label>
+            </div>
+          </section>
           <section id="controls">
             <button className="icon" onClick={() => setPlay((prev) => !prev)}>
               {!play ? (
                 <PlaySvg className="svg" />
               ) : (
                 <PauseSvg className="svg" />
+              )}
+            </button>
+            <button className="icon" onClick={() => setMute((prev) => !prev)}>
+              {!mute ? (
+                <AudioOn className="svg" />
+              ) : (
+                <AudioOff className="svg" />
               )}
             </button>
           </section>
@@ -187,6 +228,6 @@ export default function Menu({
           </button>
         </div>
       )}
-    </div>
+    </>
   );
 }

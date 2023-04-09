@@ -17,6 +17,15 @@ code {
     monospace;
 }
 
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border: 1px solid #393a3b;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: 1px solid #393a3b;
+}
+
 #root {
   background-color: #58427c;
   width: 100vw;
@@ -42,6 +51,16 @@ code {
   flex-direction: row;
   width: 100vw;
   height: 100vh;
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+
+  #menu {
+    width: 100vw !important;
+  }
 }
 
 .pomodoro-container {
@@ -139,6 +158,10 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+button:active {
+  background-color: rgba(58, 58, 58, 0.5);
+}
+
 .edit-button:hover {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
@@ -147,7 +170,30 @@ button:hover {
 
 .edit-button button,
 .edit-button p {
-  font-size: 16px; /* or any other font size value you want */
+  font-size: 16px;
+}
+
+label {
+  display: block;
+  font-size: 12px;
+}
+
+.colorSelector {
+  display: block;
+  padding: 0.5rem;
+}
+
+input[type="color"] {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-shadow: inset 0 0 0 1px #ccc;
+}
+
+input[type="color"]:hover {
+  cursor: pointer;
 }
 
 .inline-block {
@@ -172,26 +218,23 @@ button:hover {
 }
 
 #open-menu {
-  /* position: fixed;
-  top: 0;
-  left: 0; */
+  position: absolute;
+  z-index: 1;
   padding: 0.5rem;
   margin: 0.5rem;
-
-  width: 50px;
+  width: 45px;
 }
 
 #close-menu {
   position: absolute;
   top: 5px;
-  left: 210px;
+  right: 5px;
   width: 35px;
+  z-index: 1;
 }
 
 #menu {
-  /* position: fixed;
-  left: 0;
-  top: 0; */
+  position: relative;
   box-sizing: border-box;
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.7rem;
@@ -200,7 +243,7 @@ button:hover {
   height: 100%;
   padding: 3rem 1rem 1rem 1rem;
   min-width: 200px;
-  width: 250px;
+  width: 300px;
 }
 
 .session-controls {

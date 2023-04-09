@@ -6,12 +6,35 @@ import Menu from "./Components/Menu";
 function Pomodoro() {
   const [typeOfSession, setTypeOfSession] = useState("session");
   const [play, setPlay] = useState(false); // default paused
+  const [mute, setMute] = useState(true); // default paused
   const [sessionMinutes, setSessionMinutes] = useState(25);
   const [rest, setRest] = useState(5);
   const [minutes, setMinutes] = useState(sessionMinutes); // starts with a session, not a rest
   const [seconds, setSeconds] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [focusColor, setFocusColor] = useState("#1a75a2"); // blue: 1a75a2, purple: 58427c
+  const [restColor, setRestColor] = useState("#405E40");
 
-  const circleRadius = 100;
+  function handleFocusColorChange(event) {
+    setFocusColor(event.target.value);
+  }
+
+  function handleRestColorChange(event) {
+    setRestColor(event.target.value);
+  }
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth > 600 && window.innerWidth < 1000) {
+        setWindowWidth(window.innerWidth);
+      }
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const circleRadius = 0.12 * windowWidth;
   const viewBoxSizing = circleRadius * 2 + 10; //"-5 0 150 150"
   const viewBox =
     "-5 5 " + viewBoxSizing.toString() + " " + viewBoxSizing.toString();
@@ -28,7 +51,7 @@ function Pomodoro() {
     "https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg#t=33,38"
   );
 
-  if (minutes === 0 && seconds === 0) {
+  if (minutes === 0 && seconds === 0 && !mute) {
     beep.play();
   }
 
@@ -103,11 +126,19 @@ function Pomodoro() {
         typeOfSession={typeOfSession}
         setTypeOfSession={setTypeOfSession}
         setMinutes={setMinutes}
+        mute={mute}
+        setMute={setMute}
+        focusColor={focusColor}
+        setFocusColor={setFocusColor}
+        restColor={restColor}
+        setRestColor={setRestColor}
+        handleFocusColorChange={handleFocusColorChange}
+        handleRestColorChange={handleRestColorChange}
       />
       <div
         className="pomodoro-container"
         style={{
-          backgroundColor: typeOfSession === "session" ? "#58427c" : "#405E40",
+          backgroundColor: typeOfSession === "session" ? focusColor : restColor,
           color: "rgba(255, 255, 255, 0.5)",
         }}
       >
@@ -118,13 +149,6 @@ function Pomodoro() {
             width={2 * circleRadius}
             height={2 * circleRadius}
           >
-            <circle
-              className="timer-background"
-              cx={circleRadius}
-              cy={circleRadius}
-              r={circleRadius}
-              stroke={typeOfSession === "session" ? "#58427c" : "#405E40"}
-            />
             <circle
               className="timer-progress"
               cx={circleRadius}
