@@ -205,6 +205,11 @@ input[type="color"]:hover {
   flex-direction: row;
 }
 
+#description {
+  position: absolute;
+  bottom: 0px;
+}
+
 .input-container input {
   flex: 1;
   background-color: rgba(0, 0, 0, 0.1);

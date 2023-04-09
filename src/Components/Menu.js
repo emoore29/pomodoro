@@ -27,6 +27,7 @@ export default function Menu({
   setRestColor,
   handleRestColorChange,
   handleFocusColorChange,
+  typeOfSession,
 }) {
   const [activeMenu, setActiveMenu] = useState(false);
   const [editingFocus, setEditingFocus] = useState(false);
@@ -226,6 +227,18 @@ export default function Menu({
           >
             <CloseMenuSvg className="svg" />
           </button>
+          <p id="description">
+            This timer was created by{" "}
+            <a
+              style={{
+                color: typeOfSession === "session" ? focusColor : restColor,
+              }}
+              href="https://github.com/AthenasCode"
+            >
+              @AthenasCode
+            </a>
+            . Feedback via Github is welcome.
+          </p>
         </div>
       )}
     </>
