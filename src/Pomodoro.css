@@ -65,7 +65,6 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .pomodoro-container {
-  border: 3px solid blue;
   position: relative;
   width: 100%;
   height: 100%;
@@ -270,7 +269,6 @@ input[type="color"]:hover {
 /* Timer animations */
 
 .clock-container {
-  border: 3px solid green;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -280,12 +278,13 @@ input[type="color"]:hover {
   justify-content: center;
   align-items: center;
   width: 30%;
+  min-width: 200px;
+  max-width: 400px;
   aspect-ratio: 1/1;
 }
 
 .timer-background {
   fill: none;
-  /* stroke: #e6e6e6; */
   stroke-width: 3;
 }
 
@@ -299,12 +298,6 @@ input[type="color"]:hover {
 }
 
 #circle-svg {
-  border: 2px solid orange;
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   display: block;
   margin: auto;
-  /* padding: 5px; */
 }
