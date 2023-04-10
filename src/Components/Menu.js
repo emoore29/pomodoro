@@ -135,6 +135,7 @@ export default function Menu({
               <button
                 id="edit-focus-button"
                 onClick={() => handleButtonClick("edit-focus")}
+                disabled={play && typeOfSession === "session"}
               >
                 Edit focus length: {sessionMinutes}
               </button>
@@ -163,6 +164,7 @@ export default function Menu({
               <button
                 id="edit-rest-button"
                 onClick={() => handleButtonClick("edit-rest")}
+                disabled={play && typeOfSession === "rest"}
               >
                 Edit break length: {rest}
               </button>

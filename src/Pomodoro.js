@@ -33,7 +33,7 @@ function Pomodoro() {
     };
   }, []);
 
-  // Dimensions of circle calculations
+  // Dimensions of circle calculations, recalculates if timer updates
   function circleSvgCalcs() {
     const circumference = 2 * Math.PI * radius;
     const timeLeft = minutes * 60 + seconds;
