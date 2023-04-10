@@ -6,47 +6,46 @@ import Menu from "./Components/Menu";
 function Pomodoro() {
   const [typeOfSession, setTypeOfSession] = useState("session");
   const [play, setPlay] = useState(false); // default paused
-  const [mute, setMute] = useState(true); // default paused
+  const [mute, setMute] = useState(true); // default muted
   const [sessionMinutes, setSessionMinutes] = useState(25);
   const [rest, setRest] = useState(5);
   const [minutes, setMinutes] = useState(sessionMinutes); // starts with a session, not a rest
   const [seconds, setSeconds] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [focusColor, setFocusColor] = useState("#1a75a2"); // blue: 1a75a2, purple: 58427c
+
+  const [focusColor, setFocusColor] = useState("#58427c"); // blue: 1a75a2, purple: 58427c
   const [restColor, setRestColor] = useState("#405E40");
+  const [radius, setRadius] = useState(100);
 
-  function handleFocusColorChange(event) {
-    setFocusColor(event.target.value);
-  }
-
-  function handleRestColorChange(event) {
-    setRestColor(event.target.value);
-  }
-
+  // Responsive clock radius
   useEffect(() => {
+    console.log("UseEffect ran");
     function handleResize() {
-      if (window.innerWidth > 600 && window.innerWidth < 1000) {
-        setWindowWidth(window.innerWidth);
-      }
+      console.log("handling resize");
+      const clockContainerWidth =
+        document.getElementById("clock-container").offsetWidth;
+      setRadius(0.5 * clockContainerWidth);
     }
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  const circleRadius = 0.12 * windowWidth;
-  const viewBoxSizing = circleRadius * 2 + 10; //"-5 0 150 150"
-  const viewBox =
-    "-5 5 " + viewBoxSizing.toString() + " " + viewBoxSizing.toString();
-  const circleCircumference = 2 * Math.PI * circleRadius;
+  const circumference = 2 * Math.PI * radius;
   const timeLeft = minutes * 60 + seconds;
   let totalTime;
   typeOfSession === "session"
     ? (totalTime = sessionMinutes * 60)
     : (totalTime = rest * 60);
+  const strokeDashoffset = (1 - timeLeft / totalTime) * circumference; // calculates percentage of time left, offsets dasharray by that amount.
 
-  const strokeDashoffset = (1 - timeLeft / totalTime) * circleCircumference; // calculates percentage of time left, offsets dasharray by that amount.
+  const viewBoxSizing = radius * 2 + 10; //"-5 0 150 150"
+  const viewBox =
+    "-5 5 " + viewBoxSizing.toString() + " " + viewBoxSizing.toString();
 
+  // Bell ring
   const beep = new Audio(
     "https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.ogg#t=33,38"
   );
@@ -55,6 +54,7 @@ function Pomodoro() {
     beep.play();
   }
 
+  // Other
   function toggleSessionType() {
     setSeconds(0);
     if (typeOfSession === "session") {
@@ -112,6 +112,14 @@ function Pomodoro() {
     updateDisplayOfMinutes();
   }, [sessionMinutes, rest, typeOfSession]);
 
+  function handleFocusColorChange(event) {
+    setFocusColor(event.target.value);
+  }
+
+  function handleRestColorChange(event) {
+    setRestColor(event.target.value);
+  }
+
   return (
     <div className="container">
       <Menu
@@ -146,15 +154,15 @@ function Pomodoro() {
           <svg
             id="circle-svg"
             viewBox={viewBox}
-            width={2 * circleRadius}
-            height={2 * circleRadius}
+            width={3 * radius}
+            height={3 * radius}
           >
             <circle
               className="timer-progress"
-              cx={circleRadius}
-              cy={circleRadius}
-              r={circleRadius}
-              strokeDasharray={circleCircumference}
+              cx={radius}
+              cy={radius}
+              r={radius}
+              strokeDasharray={circumference}
               strokeDashoffset={strokeDashoffset}
             />
           </svg>
